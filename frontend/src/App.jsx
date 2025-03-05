@@ -1,12 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import "./App.css";
 
+const BASE_URL = import.meta.env.VITE_API;
+
 function App() {
   const [todos, setTodos] = useState([]);
   const textRef = useRef();
 
   async function getTodos() {
-    const response = await fetch("http://localhost:8080/api/todos");
+    const response = await fetch(`${BASE_URL}/api/todos`);
     const result = await response.json();
     setTodos(result);
   }
@@ -20,7 +22,7 @@ function App() {
     const todo = {
       text: textRef.current.value,
     };
-    const response = await fetch("http://localhost:8080/api/todos", {
+    const response = await fetch(`${BASE_URL}/api/todos`, {
       method: "POST",
       body: JSON.stringify(todo),
       headers: {
@@ -33,7 +35,7 @@ function App() {
   }
 
   async function handleDelete(id) {
-    await fetch(`http://localhost:8080/api/todos/${id}`, {
+    await fetch(`${BASE_URL}/api/todos/${id}`, {
       method: "DELETE",
     });
     getTodos();
@@ -42,7 +44,7 @@ function App() {
   async function handleComplete(id) {
     const foundTodo = todos.find((todo) => todo._id == id);
     foundTodo.completed = !foundTodo.completed;
-    await fetch(`http://localhost:8080/api/todos/${id}`, {
+    await fetch(`${BASE_URL}/api/todos/${id}`, {
       method: "PUT",
       body: JSON.stringify(foundTodo),
       headers: {
