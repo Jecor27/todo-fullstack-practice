@@ -33,6 +33,13 @@ function App() {
     setTodos([...todos, todoDoc]);
   }
 
+  async function handleDelete(id) {
+    await fetch(`http://localhost:8080/api/todos/${id}`, {
+      method: "DELETE",
+    });
+    //update the state to remove the todo item
+  }
+
   return (
     <>
       <h1>Todos</h1>
@@ -42,7 +49,16 @@ function App() {
       </form>
       <ul>
         {todos.map((todo) => (
-          <li key={todo._id}>{todo.text}</li>
+          <li key={todo._id}>
+            {todo.text}{" "}
+            <button
+              onClick={() => {
+                handleDelete(todo._id);
+              }}
+            >
+              X
+            </button>
+          </li>
         ))}
       </ul>
     </>
