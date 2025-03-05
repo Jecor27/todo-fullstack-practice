@@ -1,3 +1,76 @@
-li {
+/* frontend/src/App.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.app-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.todo-list {
   list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item.completed {
+  text-decoration: line-through;
+  color: #666;
+}
+
+.delete-btn {
+  float: right;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.add-todo-form {
+  margin-top: 20px;
+}
+
+.add-todo-input {
+  width: 70%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  margin-right: 20px;
+  /* Increased margin to 20px */
+}
+
+.add-todo-btn {
+  width: 25%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.add-todo-btn:hover {
+  background-color: #3e8e41;
+}
+
+.todo-checkbox {
+  margin-right: 10px;
 }

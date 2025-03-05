@@ -1,3 +1,5 @@
+// frontend/src/App.jsx (no changes needed)
+
 import { useEffect, useState, useRef } from "react";
 import "./App.css";
 
@@ -54,29 +56,40 @@ function App() {
     getTodos();
   }
 
-  console.log(todos);
-
   return (
-    <>
-      <h1>Todos</h1>
-      <form onSubmit={handleSubmit}>
-        <input ref={textRef} />
-        <button>Submit</button>
-      </form>
-      <ul>
+    <div className="app-container">
+      <h1>Todo List</h1>
+      <ul className="todo-list">
         {todos.map((todo) => (
-          <li key={todo._id}>
+          <li
+            key={todo._id}
+            className={`todo-item ${todo.completed ? "completed" : ""}`}
+          >
             <input
               type="checkbox"
+              className="todo-checkbox"
               checked={todo.completed}
               onChange={() => handleComplete(todo._id)}
             />
-            {todo.text}
-            <button onClick={() => handleDelete(todo._id)}>X</button>
+            <span>{todo.text}</span>
+            <span className="delete-btn" onClick={() => handleDelete(todo._id)}>
+              ×
+            </span>
           </li>
         ))}
       </ul>
-    </>
+      <form className="add-todo-form" onSubmit={handleSubmit}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <input
+            type="text"
+            ref={textRef}
+            className="add-todo-input"
+            placeholder="Add new todo"
+          />
+          <button className="add-todo-btn">Add Todo</button>
+        </div>
+      </form>
+    </div>
   );
 }
 
