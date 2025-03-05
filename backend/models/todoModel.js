@@ -1,11 +1,10 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const todoSchema = new mongoose.Schema({
     text: { type: String },
     completed: { type: Boolean, default: false }
-
 })
 
-const Todo = Mongoose.model('Todo', todoSchema) //collection called todos
+const Todo = mongoose.model('Todo', todoSchema)
 
 export default Todo
