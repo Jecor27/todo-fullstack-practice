@@ -39,6 +39,19 @@ function App() {
     getTodos();
   }
 
+  async function handleComplete(id) {
+    const foundTodo = todos.find((todo) => todo._id == id);
+    foundTodo.completed = !foundTodo.completed;
+    await fetch(`http://localhost:8080/api/todos/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(foundTodo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    getTodos();
+  }
+
   console.log(todos);
 
   return (
@@ -51,6 +64,11 @@ function App() {
       <ul>
         {todos.map((todo) => (
           <li key={todo._id}>
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => handleComplete(todo._id)}
+            />
             {todo.text}
             <button onClick={() => handleDelete(todo._id)}>X</button>
           </li>
