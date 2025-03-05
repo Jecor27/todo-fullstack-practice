@@ -15,8 +15,6 @@ function App() {
     getTodos();
   }, []);
 
-  console.log(todos);
-
   async function handleSubmit(e) {
     e.preventDefault();
     const todo = {
@@ -31,14 +29,17 @@ function App() {
     });
     const todoDoc = await response.json();
     setTodos([...todos, todoDoc]);
+    textRef.current.value = "";
   }
 
   async function handleDelete(id) {
     await fetch(`http://localhost:8080/api/todos/${id}`, {
       method: "DELETE",
     });
-    //update the state to remove the todo item
+    getTodos();
   }
+
+  console.log(todos);
 
   return (
     <>
@@ -50,14 +51,8 @@ function App() {
       <ul>
         {todos.map((todo) => (
           <li key={todo._id}>
-            {todo.text}{" "}
-            <button
-              onClick={() => {
-                handleDelete(todo._id);
-              }}
-            >
-              X
-            </button>
+            {todo.text}
+            <button onClick={() => handleDelete(todo._id)}>X</button>
           </li>
         ))}
       </ul>
