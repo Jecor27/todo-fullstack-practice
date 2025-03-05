@@ -1,5 +1,8 @@
 import express from "express"
 import cors from 'cors'
+import 'dotenv/config'
+
+import connectDB from "./db.js"
 
 const app = express()
 
@@ -14,4 +17,5 @@ app.get('/test', (req, res) => {
 
 app.listen(port, () => {
     console.log('connected from server on port: ', port)
+    connectDB()
 })
