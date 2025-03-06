@@ -63,4 +63,3 @@ app.listen(port, () => {
     connectDB()
 })
 
-module.exports = app;
